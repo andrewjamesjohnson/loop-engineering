@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loop Engineering · Andrew James Johnson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ANDREW J. JOHNSON · LOOP ENGINEERING EXHIBIT
+   Same stock, fonts and masthead as the resume. One page, Letter.
+   Ink for the work, one blue for the loops. No fills but one:
+   the person node is solid, because it is the only human.
+   ============================================================ */
+:root{
+  --display:Poppins,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --text:Inter,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --sheet:#F2F2F0; --ink:#111111; --mid:#2E2E2E; --grey:#3D3D3D; --light:#5E5E5E;
+  --rule:#B4B4B0; --hair:#CFCFCB; --loop:#1F45B8;
+}
+@page{size:8.5in 11in;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#DDDDDA}
+body{
+  color:var(--grey);font-family:var(--text);
+  font-size:9.4px;font-weight:400;line-height:1.5;letter-spacing:-.004em;
+  font-variant-numeric:tabular-nums;font-feature-settings:"kern" 1,"liga" 1;
+  text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;hyphens:none;
+}
+p,.node .d,.harness .t,.stat .t,.desk .t,.parts .e{text-wrap:pretty}
+.sheet > *{flex-shrink:0}
+.sheet{
+  width:8.5in;height:11in;margin:0 auto;background:var(--sheet);
+  padding:0.34in 0.46in 0.28in;display:flex;flex-direction:column;overflow:hidden;
+}
+@media screen{ body{padding:28px 0} .sheet{box-shadow:0 2px 6px rgba(0,0,0,.10),0 22px 54px rgba(0,0,0,.16)} }
+@media print{ html,body{background:var(--sheet)} }
+
+/* ---------- masthead (the resume's) ---------- */
+.masthead{display:flex;justify-content:space-between;align-items:flex-start;gap:22px}
+.name{font-family:var(--display);font-size:29px;font-weight:300;letter-spacing:.09em;text-transform:uppercase;color:var(--ink);line-height:1.06}
+.name b{font-weight:700;letter-spacing:.055em}
+.title{font-family:var(--display);font-size:9.4px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--light);margin-top:9px}
+.contact{display:flex;flex-direction:column;gap:1px;align-items:flex-end;padding-top:2px}
+.crow{display:flex;align-items:center;gap:9px;font-size:8.8px;font-weight:450;color:var(--mid)}
+.crow svg{width:10px;height:10px;flex:0 0 10px;fill:var(--ink)}
+.rule{height:1px;background:var(--rule);margin:12px 0 0}
+
+/* ---------- headline ---------- */
+.kicker{font-family:var(--display);font-size:8.6px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);margin-top:10px}
+h1{font-family:var(--display);font-size:27px;font-weight:600;letter-spacing:-.005em;color:var(--ink);line-height:1.12;margin-top:5px}
+h1 span{font-weight:300}
+.lede{font-size:10.4px;line-height:1.55;color:var(--mid);margin-top:7px;max-width:7.3in}
+
+/* ---------- the chain: prompt to graph ---------- */
+.chain{margin-top:12px;border-top:2px solid var(--ink);padding-top:7px;font-family:var(--display);font-size:9.8px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.chain i{font-style:normal;font-weight:400;color:var(--light);margin:0 9px}
+.chain span{font-family:var(--text);font-size:9.4px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--grey);margin-left:10px}
+
+/* ---------- the graph ---------- */
+.graph{position:relative;width:100%;height:347px;margin-top:14px}
+.graph svg.wires{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.frame-label{position:absolute;top:3px;left:14px;background:var(--sheet);padding:0 8px;
+  font-family:var(--display);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);line-height:14px}
+.frame-label span{font-family:var(--text);font-weight:400;letter-spacing:0;text-transform:none;color:var(--grey);font-size:9px;margin-left:6px}
+.node{position:absolute;width:98px;height:76px;border:1.5px solid var(--ink);background:var(--sheet);padding:6px 7px 6px 8px}
+.node .n{font-family:var(--display);font-size:10.4px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink);line-height:1.2}
+.node .k{font-family:var(--display);font-size:6.9px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--light);margin-top:1px;line-height:1.3}
+.node .d{font-size:8.3px;line-height:1.3;color:var(--mid);margin-top:3px}
+.node.me{background:var(--ink)}
+.node.me .n{color:var(--sheet)} .node.me .k{color:#BDBDB8} .node.me .d{color:#E6E6E2}
+.node.sm{height:62px}
+.lp{position:absolute;color:var(--loop);font-size:8.4px;line-height:1.35}
+.lp b{display:block;font-family:var(--display);font-size:9px;font-weight:600;letter-spacing:.15em;text-transform:uppercase}
+.tag{position:absolute;font-family:var(--display);font-size:7.2px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--loop)}
+.harness{position:absolute;left:18px;right:18px;top:282px;display:grid;grid-template-columns:repeat(6,1fr);gap:0 14px;border-top:1px solid var(--rule);padding-top:7px}
+.harness .h{font-family:var(--display);font-size:8.2px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.harness .t{font-size:8.2px;line-height:1.35;color:var(--grey);margin-top:2px}
+
+.rulebar{display:flex;justify-content:space-between;align-items:baseline;gap:18px;margin-top:7px}
+.principle{font-family:var(--display);font-size:11.6px;font-weight:500;color:var(--ink);letter-spacing:.005em}
+.legend{position:absolute;top:3px;right:14px;background:var(--sheet);padding:0 8px;line-height:14px;display:flex;gap:16px;font-size:8.4px;color:var(--grey);white-space:nowrap}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend svg{width:22px;height:8px}
+
+/* ---------- lower sections ---------- */
+h2{font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);line-height:1.1}
+.sub{font-size:8.8px;color:var(--light);margin-top:3px}
+.band{display:grid;grid-template-columns:1fr 1fr;gap:0 30px;margin-top:9px}
+.band > section{border-top:2px solid var(--ink);padding-top:8px}
+.bhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.bhead .sub{margin-top:0}
+
+.parts{margin-top:8px}
+.parts .row{display:grid;grid-template-columns:16px 66px 1fr;gap:0 6px;align-items:baseline;border-top:1px solid var(--hair);padding:2px 0;line-height:1.35}
+.parts .row:first-child{border-top:0}
+.parts .no{font-family:var(--display);font-size:8.6px;font-weight:600;color:var(--light)}
+.parts .p{font-family:var(--display);font-size:8.6px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.parts .e{font-size:8.9px;color:var(--mid)}
+.foot{font-size:8.4px;color:var(--light);margin-top:5px;border-top:1px solid var(--hair);padding-top:5px}
+
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;margin-top:10px}
+.stat .v{font-family:var(--display);font-size:25px;font-weight:600;color:var(--ink);line-height:1;letter-spacing:-.01em}
+.stat .v small{font-size:13px;font-weight:500;margin-left:1px}
+.stat .t{font-size:8.7px;line-height:1.4;color:var(--mid);margin-top:5px}
+
+.desks{margin-top:10px;margin-bottom:7px;border-top:2px solid var(--ink);padding-top:8px}
+.desks .head{display:flex;justify-content:space-between;align-items:baseline;gap:20px}
+.desks .head .sub{margin-top:0;color:var(--mid)}
+.sys{display:grid;grid-template-columns:84px repeat(4,1fr);gap:0 14px;margin-top:7px}
+.sys > div{border-top:1px solid var(--hair);padding:2px 0;font-size:8.9px;line-height:1.3;color:var(--mid)}
+.sys .c{border-top:0;padding-top:0;font-family:var(--display);font-size:7.4px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--light)}
+.sys .c i{font-style:normal;color:var(--ink);margin-left:5px}
+.sys .r{font-family:var(--display);font-size:8.6px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.sys .all{font-weight:600;color:var(--ink)}
+
+.close{margin-top:auto;border-top:2px solid var(--ink);padding-top:7px}
+.close .big{font-family:var(--display);font-size:14.2px;font-weight:500;color:var(--ink);line-height:1.3;text-wrap:pretty}
+.close .big b{font-weight:600;color:var(--loop)}
+.close .small{font-size:9.4px;line-height:1.45;color:var(--mid);margin-top:3px}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="masthead">
+    <div>
+      <div class="name"><b>Andrew</b> James Johnson</div>
+      <div class="title">Applied AI &amp; Systems Builder</div>
+    </div>
+    <div class="contact">
+      <div class="crow">linkedin.com/in/andrewj3
+        <svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05a4.2 4.2 0 0 1 3.750-2c4 0 4.75 2.6 4.75 6V21h-4v-5.3c0-1.3 0-2.9-1.8-2.9s-2.05 1.4-2.05 2.8V21H9z"/></svg>
+      </div>
+      <div class="crow">github.com/andrewjamesjohnson
+        <svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.880-1.370-3.880-1.370-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+      </div>
+    </div>
+  </header>
+  <div class="rule"></div>
+
+  <div class="kicker">Loop &amp; graph engineering</div>
+  <h1>Same model. <span>Better system.</span></h1>
+  <p class="lede">A better model alone changes little. The system around it does the work: a harness that keeps every step on track, a graph that joins the steps, and loops that check the work and learn from real results. Shown on the Clip Factory, the media operation I built and run on Anthropic's Claude.</p>
+
+  <div class="chain">Prompt<i>→</i>Agent<i>→</i>Harness<i>→</i>Loop<i>→</i>Graph<span>Each one wraps the one before. Below, all five at work.</span></div>
+
+  <!-- ============ THE GRAPH ============ -->
+  <div class="graph">
+    <svg class="wires" viewBox="0 0 728 347" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <marker id="ai" viewBox="0 0 8 8" refX="7.4" refY="4" markerWidth="7" markerHeight="7" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L8 4L0 8z" fill="#111111"/></marker>
+        <marker id="ab" viewBox="0 0 8 8" refX="7.4" refY="4" markerWidth="7" markerHeight="7" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L8 4L0 8z" fill="#1F45B8"/></marker>
+      </defs>
+      <!-- the harness frame -->
+      <rect x="0.75" y="10" width="726.5" height="335.5" fill="none" stroke="#111111" stroke-width="1.5"/>
+      <!-- main line of work, left to right -->
+      <g stroke="#111111" stroke-width="1.5" fill="none" marker-end="url(#ai)">
+        <line x1="116.8" y1="106" x2="135.3" y2="106"/>
+        <line x1="235.6" y1="106" x2="254.1" y2="106"/>
+        <line x1="354.4" y1="106" x2="372.9" y2="106"/>
+        <line x1="473.2" y1="106" x2="491.7" y2="106"/>
+        <line x1="592.0" y1="106" x2="610.5" y2="106"/>
+      </g>
+      <g stroke="#1F45B8" stroke-width="1.6" fill="none" marker-end="url(#ab)">
+        <!-- week loop: results back to the start, over the top -->
+        <polyline points="661,67 661,50 67,50 67,66.5"/>
+        <!-- clip loop: critic to fixer and back -->
+        <line x1="290" y1="145" x2="290" y2="178.5"/>
+        <line x1="319" y1="180" x2="319" y2="146.5"/>
+        <!-- day loop: results to learner, learner back to the makers -->
+        <line x1="661" y1="145" x2="661" y2="178.5"/>
+        <polyline points="661,243 661,258 185.8,258 185.8,146.5"/>
+      </g>
+    </svg>
+
+    <div class="frame-label">The harness <span>what keeps every step on track</span></div>
+    <div class="legend">
+      <span><svg viewBox="0 0 22 8"><line x1="0" y1="4" x2="15" y2="4" stroke="#111111" stroke-width="1.5"/><path d="M14 0.5L21 4L14 7.5z" fill="#111111"/></svg>the work</span>
+      <span><svg viewBox="0 0 22 8"><line x1="0" y1="4" x2="15" y2="4" stroke="#1F45B8" stroke-width="1.6"/><path d="M14 0.5L21 4L14 7.5z" fill="#1F45B8"/></svg>a loop sending results back</span>
+    </div>
+
+    <div class="lp" style="left:150px;top:22px;width:430px;text-align:center"><b style="display:inline">Week loop</b> &nbsp;weekly &nbsp;·&nbsp; changes the rules &nbsp;·&nbsp; every change ends KEEP, NO EFFECT or ROLL BACK</div>
+
+    <div class="node" style="left:18px;top:68px"><div class="n">Scouts</div><div class="k">Claude agent</div><div class="d">Find the moments worth cutting.</div></div>
+    <div class="node" style="left:136.8px;top:68px"><div class="n">Makers</div><div class="k">Claude + code</div><div class="d">Cut clips overnight. Code checks every rule.</div></div>
+    <div class="node" style="left:255.6px;top:68px"><div class="n">Critic</div><div class="k">Claude agent</div><div class="d">A separate judge: PASS, FIX or KILL.</div></div>
+    <div class="node me" style="left:374.4px;top:68px"><div class="n">Me</div><div class="k">Person</div><div class="d">The only human. I watch each clip and approve it.</div></div>
+    <div class="node" style="left:493.2px;top:68px"><div class="n">Post</div><div class="k">Code</div><div class="d">Official APIs: YouTube, Facebook, Instagram.</div></div>
+    <div class="node" style="left:612px;top:68px"><div class="n">Results</div><div class="k">Code</div><div class="d">Views at 24 hours, per clip, per platform.</div></div>
+
+    <div class="tag" style="left:263px;top:156px">Fix</div>
+    <div class="tag" style="left:325px;top:156px">Again</div>
+    <div class="node sm" style="left:255.6px;top:180px"><div class="n">Fixer</div><div class="k">Claude agent</div><div class="d">One safe fix, never a recut.</div></div>
+    <div class="lp" style="left:374.4px;top:183px;width:120px"><b>Clip loop</b>minutes · changes this clip<br>two rounds, then me<br>built, in shadow for now</div>
+
+    <div class="node sm" style="left:612px;top:180px"><div class="n">Learner</div><div class="k">Code + Claude</div><div class="d">Turns results into lessons.</div></div>
+
+    <div class="lp" style="left:196px;top:263px;width:456px;text-align:center"><b style="display:inline">Day loop</b> &nbsp;daily &nbsp;·&nbsp; changes tomorrow's picks and hooks &nbsp;·&nbsp; lessons teach the next night</div>
+
+    <div class="harness">
+      <div><div class="h">Memory</div><div class="t">One shared board every step reads first and writes last.</div></div>
+      <div><div class="h">Gates</div><div class="t">Code checks each rule and answers in fixed words.</div></div>
+      <div><div class="h">Budget</div><div class="t">A guard stops jobs before the week's usage runs out.</div></div>
+      <div><div class="h">Journal</div><div class="t">Every run leaves a line, so a crash picks up where it fell.</div></div>
+      <div><div class="h">Replay</div><div class="t">Real past jobs rerun before any engine change ships.</div></div>
+      <div><div class="h">Undo</div><div class="t">Every live change ships with a way back.</div></div>
+    </div>
+  </div>
+
+  <div class="rulebar">
+    <div class="principle">Inner loops change numbers. Outer loops change rules. Only a person changes taste.</div>
+  </div>
+
+  <!-- ============ PARTS + EVIDENCE ============ -->
+  <div class="band">
+    <section>
+      <div class="bhead"><h2>Seven parts of a loop</h2><div class="sub">the clip loop, filled in</div></div>
+      <div class="parts">
+        <div class="row"><span class="no">1</span><span class="p">Start</span><span class="e">The critic says FIX.</span></div>
+        <div class="row"><span class="no">2</span><span class="p">Goal</span><span class="e">The clip passes the critic.</span></div>
+        <div class="row"><span class="no">3</span><span class="p">Memory</span><span class="e">The critic's notes and the clip's past calls.</span></div>
+        <div class="row"><span class="no">4</span><span class="p">Allowed</span><span class="e">Only the fixer's safe fixes, never a recut.</span></div>
+        <div class="row"><span class="no">5</span><span class="p">Proof</span><span class="e">The critic checks again. A maker never grades itself.</span></div>
+        <div class="row"><span class="no">6</span><span class="p">Feedback</span><span class="e">The critic's reason goes back to the fixer.</span></div>
+        <div class="row"><span class="no">7</span><span class="p">Stop</span><span class="e">Two rounds, then a person decides.</span></div>
+      </div>
+      <div class="foot">15 scheduled Claude jobs checked on all seven: 101 of 105 in place.</div>
+    </section>
+
+    <section>
+      <div class="bhead"><h2>Evidence, not confidence</h2><div class="sub">measured November 2026</div></div>
+      <div class="stats">
+        <div class="stat"><div class="v">6</div><div class="t">Reels a day is all Facebook shows a Page this size. The first two drew 94% of views, so the best clip now leads.</div></div>
+        <div class="stat"><div class="v">33</div><div class="t">real past jobs rerun before an engine change ships. The first replay: 0 new failures.</div></div>
+        <div class="stat"><div class="v">36<small>%</small></div><div class="t">of the time the AI critic agreed with my calls. So its gate stays in shadow until it reaches 70% across 12 calls.</div></div>
+        <div class="stat"><div class="v">402</div><div class="t">gate refusals in 7 days, counted by rule. The top 3 now open every night's run, each with its rule.</div></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ ANY SYSTEM ============ -->
+  <section class="desks">
+    <div class="head">
+      <h2>The same loop fits any system</h2>
+      <div class="sub">Clips are just the easiest to show. Any system: data in, a decision, data out, a check.</div>
+    </div>
+    <div class="sys">
+      <div class="c"></div><div class="c">Data in<i>→</i></div><div class="c">Decision<i>→</i></div><div class="c">Data out<i>→</i></div><div class="c">Proof</div>
+      <div class="r">Media</div><div>Streams, video, news</div><div>Which moment to cut</div><div>A posted clip</div><div>Views at 24 hours</div>
+      <div class="r">Energy</div><div>Load, prices, weather</div><div>When to buy, store or run</div><div>A dispatch schedule</div><div>Real cost against forecast</div>
+      <div class="r">Finance</div><div>Prices, filings, news</div><div>Which idea to test</div><div>A signal or a trade plan</div><div>Returns on data it never saw</div>
+      <div class="r">Operations</div><div>Orders, tickets, invoices</div><div>What to route, flag or fix</div><div>An action or a report</div><div>Errors caught, time saved</div>
+      <div class="r">Any system</div><div class="all">Whatever comes in</div><div class="all">What to do with it</div><div class="all">Whatever goes out</div><div class="all">A check, never the agent's word</div>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="big">A system like this, in any niche, running on its own 24/7, is where the value in AI lies.<br><b>The more compute you own, the more loops you run, and the deeper each one goes.</b></div>
+    <p class="small">My own logs show it. Today a weekly usage cap decides how many loops run, and when it ran out on 25 October a whole night of clips was lost. On local hardware the loops run day and night with no meter, and each decision can test 30 versions instead of one.</p>
+  </section>
+</div>
+</body>
+</html>
